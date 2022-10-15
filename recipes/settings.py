@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 from dotenv import load_dotenv
 
-load_dotenv()  # take environment variables from .env
+load_dotenv(override=True)  # take environment variables from .env
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
+    "recipe",
+    "review",
+    "tag",
 ]
 
 MIDDLEWARE = [
