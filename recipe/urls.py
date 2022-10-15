@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+app_name = "recipe"
+
+
 urlpatterns = [
     path("create/", view=views.create_recipe_view, name="create"),
     path("list/", view=views.list_recipes_view, name="list"),

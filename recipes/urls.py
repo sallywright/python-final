@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
+    path("__reload__/", include("django_browser_reload.urls")),
     path("admin/", admin.site.urls),
-    path("recipe/", include("recipe.urls")),
-    path("tag/", include("tag.urls")),
-    path("review/", include("review.urls")),
+    path("", views.home_view, name="home"),
+    path("login/", views.login_view, name="login"),
+    path("register/", views.register_view, name="register"),
+    path("recipes/", include("recipe.urls")),
+    path("tags/", include("tag.urls")),
+    path("reviews/", include("review.urls")),
+    path("ingredients/", include("ingredient.urls")),
 ]
