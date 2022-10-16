@@ -3,14 +3,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home</title>
+    <title>Ingredients</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% tailwind_css %}
   </head>
 
-  <body class="dark:bg-gray-800 flex">
+  <body class="dark:bg-gray-800">
+    <div class="flex">
+
     <aside class="w-64" aria-label="Sidebar">
       <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
          <ul class="space-y-2">
@@ -39,7 +41,6 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Tags</span>
                 </a>
               </li>
-             
             {% else %}
             <li>
               <a href="/login/" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -58,11 +59,38 @@
          </ul>
       </div>
    </aside>
-    <div class="min-h-screen flex justify-center items-center w-full">
-      <div class="w-full max-w-screen-sm dark:text-white  align-top	text-center text-5xl	">
-        Welcome, {{user.username}}
-      </div>
+    <div class="w-full min-h-screen flex justify-center items-center">
+      <div class="w-full max-w-screen-sm">
+        <form action="{% url 'ingredients:create' %}" method="post" id="form" class="">
+          {% csrf_token %}
 
+          <div class="mb-6">
+            <label
+              for="title"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >Name</label
+            >
+            <input
+              name="name"
+              type="text"
+              id="name"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Chicken"
+              required=""
+              data-np-invisible="1"
+              data-np-checked="1"
+            />
+          </div>
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
+
   </body>
 </html>

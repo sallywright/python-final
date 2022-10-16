@@ -33,5 +33,10 @@ def get_tag_view(request, tag_id):
 
 
 def list_tags_view(request):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response)
+    context = {"user_authenticated": False}
+    if request.method == "GET":
+        if request.user.is_authenticated:
+            context = {**context, "user_authenticated": True}
+        tags = models.Tag.objects.all()
+        context = {**context, "tags": tags}
+        return render(request, "tags/index.html", context)

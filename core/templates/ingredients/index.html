@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-    <title>Home</title>
+    <title>Ingredients</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -12,7 +12,7 @@
 </head>
 
 <body class="dark:bg-gray-800">
-    <div class="flex">
+    <div  class="flex w-full">
 
     <aside class="w-64" aria-label="Sidebar">
         <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
@@ -61,57 +61,29 @@
            </ul>
         </div>
      </aside>
-    <div class=" w-full overflow-x-auto relative shadow-md sm:rounded-lg">
+    <div class=" w-full overflow-x-auto relative sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="py-3 px-6">Recipe title</th>
-                    <th scope="col" class="py-3 px-6">Price</th>
-                    <th scope="col" class="py-3 px-6">Tags</th>
-                    <th scope="col" class="py-3 px-6">Action</th>
+                    <th scope="col" class="py-3 px-6">Id</th>
+                    <th scope="col" class="py-3 px-6">Name</th>
                 </tr>
             </thead>
             <tbody>
-                {% for recipe in recipes %}
+                {% for ingredient in ingredients %}
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{recipe.title}}
+                        {{ingredient.id}}
                     </th>
-                    <td class="py-4 px-6">{{recipe.price}}$</td>
-                    {% if recipe.tags|stringformat:'s' == 'core.Tag.None' %}
-                    <td class="py-4 px-6">
-                        <form action="/recipes/{{recipe.id}}/tags/" method="get">
-                            <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Add tag</button>
-                        </form>
-                    </td>
-                    {% else %}
+                    <th class="py-4 px-6">{{ingredient.name|upper}}</th>
+                        
                     
-                    <td class="py-4 px-6 flex flex-wrap gap-1 w-full">
-                        {% for tag in recipe.tags %}
-                        <button type="button" class="mx-4 my-4 py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{tag|upper}}</button>
-
-                        {% endfor %}
-                        <form action="/recipes/{{recipe.id}}/tags/" method="get">
-                            <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 my-2 m-4 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Add tag</button>
-                        </form>
-                    {% endif %}
-                    <td class="py-4 px-6 w-1/5">
-                        <form action="/recipes/{{recipe.id}}/" method="get">
-                            <button type="submit"
-                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</button>
-                        </form>
-                        <form action="/recipes/{{recipe.id}}/delete/" method="post">
-                            {% csrf_token %}
-                            <button type="submit"
-                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
-                        </form>
-                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <form action="/recipes/create/" method="get">
+        <form action="/ingredients/create/" method="get">
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6 ml-6">
                 Create new
@@ -122,12 +94,12 @@
                         clip-rule="evenodd"></path>
                 </svg>
             </button>
-            
         </form>
     </div>
+</div>
+
     
 
-</div>
 
 </body>
 
