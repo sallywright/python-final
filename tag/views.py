@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_http_methods
 from core import models
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def create_tag_view(request):
     context = {"user_authenticated": False}
@@ -23,15 +25,11 @@ def create_tag_view(request):
             tag.save()
             return redirect("recipe:list")
 
-        except:
-            return Http404("yet")
+        except Exception as e:
+            raise Http404(e)
 
 
-def get_tag_view(request, tag_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % tag_id)
-
-
+@login_required
 def list_tags_view(request):
     context = {"user_authenticated": False}
     if request.method == "GET":

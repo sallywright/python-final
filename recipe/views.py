@@ -1,12 +1,13 @@
-from ssl import CertificateError
 from urllib import response
 from django.shortcuts import redirect, render
 from django.http import Http404, HttpResponse
 from core import models
 from django.views.decorators.http import require_http_methods
 from datetime import datetime, date
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def create_recipe_view(request):
     context = {"user_authenticated": False}
@@ -31,10 +32,11 @@ def create_recipe_view(request):
             recipe.save()
             return redirect("recipe:list")
 
-        except:
-            return Http404()
+        except Exception as e:
+            raise Http404(e)
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def get_recipe_view(request, recipe_id):
     context = {"user_authenticated": False}
@@ -72,10 +74,11 @@ def get_recipe_view(request, recipe_id):
             recipe.save()
             return redirect("recipe:list")
 
-        except:
-            return Http404()
+        except Exception as e:
+            raise Http404(e)
 
 
+@login_required
 @require_http_methods(["GET"])
 def list_recipes_view(request):
     context = {"user_authenticated": False}
@@ -102,11 +105,7 @@ def list_recipes_view(request):
         return render(request, "login/index.html", context)
 
 
-def delete_recipe_view(request, recipe_id):
-    response = "You're looking at the results of %s recipe deletion."
-    return HttpResponse(response % recipe_id)
-
-
+@login_required
 def get_recipe_tags_view(request, recipe_id):
     if request.method == "GET":
         context = {"user_authenticated": False}
@@ -122,6 +121,7 @@ def get_recipe_tags_view(request, recipe_id):
         return render(request, "recipes/tags.html", context)
 
 
+@login_required
 def add_recipe_tag_view(request, recipe_id, tag_id):
     if request.method == "POST":
         recipe = models.Recipe.objects.filter(id=recipe_id).first()
@@ -130,6 +130,7 @@ def add_recipe_tag_view(request, recipe_id, tag_id):
     return redirect("recipe:list")
 
 
+@login_required
 def get_recipe_ingredients_view(request, recipe_id):
     if request.method == "GET":
         context = {"user_authenticated": False}
@@ -148,6 +149,7 @@ def get_recipe_ingredients_view(request, recipe_id):
         return render(request, "recipes/ingredients.html", context)
 
 
+@login_required
 def add_recipe_ingredient_view(request, recipe_id, ingredient_id):
     if request.method == "POST":
         recipe = models.Recipe.objects.filter(id=recipe_id).first()
@@ -156,6 +158,7 @@ def add_recipe_ingredient_view(request, recipe_id, ingredient_id):
     return redirect("recipe:view", recipe_id)
 
 
+@login_required
 def add_recipe_review_view(request, recipe_id):
 
     if request.method == "POST":
@@ -175,8 +178,8 @@ def add_recipe_review_view(request, recipe_id):
             recipe.reviews.add(review)
             return redirect("recipe:view", recipe_id)
 
-        except:
-            return Http404()
+        except Exception as e:
+            raise Http404(e)
 
     context = {"user_authenticated": False}
     if request.method == "GET":

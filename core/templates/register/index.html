@@ -16,10 +16,10 @@
           <form
               id="registerForm"
               class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-              action="//localhost:3001/api/v1/register"
+              action="/register/"
               method="POST"
-              onSubmit={registerSubmit}
           >
+          {% csrf_token %}
               <div class="mb-4">
                   <label
                       class="block text-gray-700 text-sm font-bold mb-2"
@@ -38,16 +38,16 @@
               <div class="mb-4">
                   <label
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      for="fullName"
+                      for="username"
                   >
-                      Full name
+                      Username
                   </label>
                   <input
                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="fullName"
-                      name="fullName"
+                      id="username"
+                      name="username"
                       type="text"
-                      placeholder="e.g. John Doe"
+                      placeholder="e.g. yeeha"
                   />
               </div>
               <div class="mb-4">
@@ -59,8 +59,8 @@
                   </label>
                   <input
                       class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                      id="password"
-                      name="password"
+                      id="password1"
+                      name="password1"
                       type="password"
                       placeholder="******************"
                   />
@@ -77,8 +77,8 @@
                   </label>
                   <input
                       class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                      id="passwordRepeat"
-                      name="passwordRepeat"
+                      id="password2"
+                      name="password2"
                       type="password"
                       placeholder="******************"
                   />
@@ -93,7 +93,7 @@
                   </button>
                   <a
                       class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                      href="../login/login.html"
+                      href="/login/"
                   >
                       Already a registered user?
                   </a>

@@ -34,5 +34,4 @@ urlpatterns = [
         view=views.add_recipe_review_view,
         name="add_review",
     ),
-    path("<int:recipe_id>/delete/", view=views.delete_recipe_view, name="delete"),
 ]

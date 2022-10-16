@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from core import models
 from django.http import HttpResponse, Http404
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def create_ingredient_view(request):
     context = {"user_authenticated": False}
@@ -23,15 +25,11 @@ def create_ingredient_view(request):
             ingredient.save()
             return redirect("ingredients:list")
 
-        except:
-            return Http404("yet")
+        except Exception as e:
+            raise Http404(e)
 
 
-def get_ingredient_view(request, ingredient_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % ingredient_id)
-
-
+@login_required
 def list_ingredients_view(request):
     context = {"user_authenticated": False}
     if request.method == "GET":
