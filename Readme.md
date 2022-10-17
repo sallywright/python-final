@@ -20,12 +20,13 @@
 2. All of the CSS is being stored in the `/theme/static/` directory.
 3. When I created the project, I mistakenly named it `recipes`, therefore recipes/ directory is the main project directory.
 4. All of the templates, models and migrations are being stored in the `core` app.
-5. The website does not have a funcitoning admin website.
+5. The website does not have a funcitioning admin website.
+6. MySQL server has to be installed in the computer
+7. recipes database has to be created
 
 ## Things that could be improved.
 
 1. Redirection could sometimes be more rational.
 2. Some of the Django templates could have been re-used, although for a project this small, didn't consider it to be a necessity.
-3. Not many views have authenticated user as a requirement.
-4. There could be more data validation.
-5. Front-end could be written with ReactJs as an SPA, it would improve speed.
+3. There could be more data validation.
+4. Front-end could be written with ReactJs as an SPA, it would improve speed.
